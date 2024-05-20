@@ -7,12 +7,11 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{{ route('profil') }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="{{ route('profil') }}">
                         Profil Desa
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('sejarah') }}">Sejarah Desa</a></li>
-                        <!-- Tambahkan item dropdown lainnya di sini -->
                     </ul>
                 </li>
                 <li class="nav-item">
