@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <style>
@@ -22,18 +22,18 @@
 
 <body>
     <div class="container-fluid">
-
-        @include('layouts.header')
-        @include('layouts.navbar')
-        {{-- Section Content --}}
-        <main class="py-4">
-            @yield('content')
-        </main>
-
-        @include('layouts.footer')
+        <div class="row">
+            @include('layouts.header')
+            @include('layouts.navbar')
+            {{-- Section Content --}}
+            <main class="py-4">
+                @yield('content')
+            </main>
+        </div>
+        <div class="row align-items-end ">
+            @include('layouts.footer')
+        </div>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
 </html>
