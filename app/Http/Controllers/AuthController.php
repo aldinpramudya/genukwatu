@@ -40,17 +40,22 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
-        $credentials = request(['username', 'password']);
+        $credentials = $request->only('username', 'password');
 
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (Auth::attempt($credentials)) {
+            // Jika otentikasi berhasil, buat token JWT
+            $token = auth()->attempt($credentials);
+            // Simpan token dalam cookie
+            return response()->json(['token' => $token], 200)->cookie(
+                'jwt_token', $token, 60 // waktu kedaluwarsa dalam menit
+            );
         }
 
-    return $this->respondWithToken($token);
+        // Jika otentikasi gagal, kembali ke halaman login dengan pesan kesalahan
+        return redirect()->route('login')->with('error', 'Login failed. Please try again.');
     }
-  
     /**
      * Get the authenticated User.
      *
