@@ -56,15 +56,6 @@ class AuthController extends Controller
         // Jika otentikasi gagal, kembali ke halaman login dengan pesan kesalahan
         return redirect()->route('login')->with('error', 'Login failed. Please try again.');
     }
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
   
     /**
      * Log the user out (Invalidate the token).
@@ -78,20 +69,20 @@ class AuthController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
   
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function refresh()
-    {
-        // Memastikan token valid dan dapat direfresh
-        if (!$token = Auth::refresh()) {
-            return response()->json(['error' => 'Could not refresh token'], 401);
-        }
+    // /**
+    //  * Refresh a token.
+    //  *
+    //  * @return \Illuminate\Http\JsonResponse
+    //  */
+    // public function refresh()
+    // {
+    //     // Memastikan token valid dan dapat direfresh
+    //     if (!$token = Auth::refresh()) {
+    //         return response()->json(['error' => 'Could not refresh token'], 401);
+    //     }
 
-        return $this->respondWithToken($token);
-    }
+    //     return $this->respondWithToken($token);
+    // }
   
     /**
      * Get the token array structure.

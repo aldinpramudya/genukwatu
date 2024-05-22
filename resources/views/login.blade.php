@@ -1,23 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Form Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .login-img {
-            width: 100px; /* Anda dapat menyesuaikan ukuran ini */
-            height: auto;
-        }
-        .form-control::placeholder {
-            text-align: center;
-        }
-        .form-control {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
 </head>
 <body>
 
@@ -44,12 +33,14 @@
                             <div class="form-check form-white mb-4">
                                 <input class="form-check-input" type="checkbox" id="showPassword" onclick="togglePassword()">
                                 <label class="form-check-label" for="showPassword">
-                                    Show Password
+                                    Tampilkan Password
                                 </label>
                             </div>
 
                             <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                         </form>
+
+                        <button class="btn btn-outline-light btn-lg px-5 mt-3" onclick="goBack()">Kembali</button>
                     </div>
                 </div>
             </div>
@@ -57,49 +48,7 @@
     </div>
 </div>
 
-<script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        var formData = new FormData(this);
-
-        fetch('/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}' // CSRF token jika menggunakan Laravel Blade
-            },
-            body: JSON.stringify({
-                username: formData.get('username'),
-                password: formData.get('password')
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Jika login berhasil, simpan token dalam cookie
-            if (data.token) {
-                document.cookie = `jwt_token=${data.token}; path=/`;
-                window.location.href = '/data-kependudukanadmin'; // Redirect ke halaman data-kependudukanadmin
-            } else {
-                alert(data.error || 'Login failed');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
-        });
-    });
-
-    function togglePassword() {
-        var passwordField = document.getElementById("password");
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-        } else {
-            passwordField.type = "password";
-        }
-    }
-</script>
+<script src={{ asset('assets/js/login.js') }}></script>
 
 </body>
 </html>
