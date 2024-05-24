@@ -8,7 +8,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}' // CSRF token jika menggunakan Laravel Blade
+            // 'X-CSRF-TOKEN': '{{ csrf_token() }}' // CSRF token jika menggunakan Laravel Blade
         },
         body: JSON.stringify({
             username: formData.get('username'),
@@ -18,9 +18,12 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     .then(response => response.json())
     .then(data => {
         // Jika login berhasil, simpan token dalam cookie
+        console.log(data);
         if (data.token) {
             document.cookie = `jwt_token=${data.token}; path=/`;
-            window.location.href = '/data-kependudukanadmin'; // Redirect ke halaman data-kependudukanadmin
+            // window.location.href = '/admin-surat-masuk'; // Redirect ke halaman data-kependudukanadmin
+            // redirect with authorization header
+            
         } else {
             alert(data.error || 'Login gagal');
         }

@@ -59,11 +59,10 @@ class AuthController extends Controller
             return response()->json(['token' => $token], 200)->cookie(
                 'jwt_token', $token, 60 // waktu kedaluwarsa dalam menit
             );
+        } else {
+            return redirect()->route('login')->with('error', 'Login failed. Please try again.');
         }
-
-        return redirect()->route('login')->with('error', 'Login failed. Please try again.');
     }
-
     /**
      * Log the user out (Invalidate the token).
      *
