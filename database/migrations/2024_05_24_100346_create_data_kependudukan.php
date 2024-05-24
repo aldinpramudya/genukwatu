@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rt', function (Blueprint $table) {
+        Schema::create('dataKependudukan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rw_id')->constrained('rw')->onDelete('cascade');
-            $table->string('nomor_rt');
+            $table->string('nama_dusun')->nullable();
+            $table->string('nama_kepala_rw')->nullable();
             $table->string('nama_kepala_rt');
+            $table->integer('jumlah_kk');
             $table->integer('jumlah_pria');
             $table->integer('jumlah_wanita');
-            $table->integer('jumlah_kk');
-            $table->string('no_handphone');
-            $table->string('email');
+            $table->integer('jumlah_pria_wanita');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rt');
+        Schema::dropIfExists('dataKependudukan');
     }
 };

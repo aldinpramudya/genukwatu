@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', [App\Http\Controllers\ProfilDesaController::class, 'index'])->name('profil');
 Route::get('/sejarah-desa', [App\Http\Controllers\SejarahDesaController::class, 'index'])->name('sejarah');
-Route::get('/data-kependudukan', [App\Http\Controllers\DataKependudukanController::class, 'index'])->name('data-kependudukan');
+// Route::get('/data-kependudukan', [App\Http\Controllers\DataKependudukanController::class, 'index'])->name('data-kependudukan');
 Route::get('/kontak', [App\Http\Controllers\KontakController::class, 'index'])->name('kontak');
 
 Route::get('/login', function () {
@@ -14,10 +14,17 @@ Route::get('/login', function () {
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
-Route::get('/data-kependudukanadmin', function () {
-    // Contoh halaman dashboard
-    return view('admin.data-kependudukan');
-})->name('data-kependudukanadmin');
+// Route::get('/data-kependudukanadmin', function () {
+//     // Contoh halaman dashboard
+//     return view('admin.data-kependudukan');
+// })->name('data-kependudukanadmin');
+
+
+Route::get('/data-kependudukan', [App\Http\Controllers\DataKependudukanController::class, 'indexAdmin'])->name('admin.data-kependudukan');
+Route::post('/add-data-kependudukan', [App\Http\Controllers\DataKependudukanController::class, 'store'])->name('admin.data-kependudukan.submit');
+Route::put('/edit-data-kependudukan/{id}', [App\Http\Controllers\DataKependudukanController::class, 'update'])->name('admin.data-kependudukan.edit');
+Route::delete('/data-kependudukan/{id}', [App\Http\Controllers\DataKependudukanController::class, 'destroy'])->name('admin.data-kependudukan.destroy');
+
 
 // Route Fitur Surat Masuk
 Route::get('/surat-masuk', [App\Http\Controllers\SuratMasukController::class, 'index'])->name('surat-masuk');

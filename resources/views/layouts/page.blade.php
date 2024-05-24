@@ -39,8 +39,8 @@
         <main class="py-4">
             @yield('content')
         </main>
+        @include('layouts.footer')
     </div>
-    @include('layouts.footer')
     @include('layouts.js')
 
 </body>
