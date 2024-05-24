@@ -1,36 +1,34 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+// document.getElementById('loginForm').addEventListener('submit', function (event) {
+//     event.preventDefault();
 
-    var formData = new FormData(this);
+//     var formData = new FormData(this);
 
-    fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            // 'X-CSRF-TOKEN': '{{ csrf_token() }}' // CSRF token jika menggunakan Laravel Blade
-        },
-        body: JSON.stringify({
-            username: formData.get('username'),
-            password: formData.get('password')
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Jika login berhasil, simpan token dalam cookie
-        console.log(data);
-        if (data.token) {
-            document.cookie = `jwt_token=${data.token}; path=/`;
-            window.location.href = '/data-kependudukan'; // Redirect ke halaman data-kependudukanadmin
-        } else {
-            alert(data.error || 'Login gagal');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Terjadi kesalahan. Silakan coba lagi.');
-    });
-});
+//     fetch('/login', {
+//         method: 'POST',
+//         headers: {
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//             username: formData.get('username'),
+//             password: formData.get('password'),
+//             _token: formData.get('_token')
+//         })
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log('Success:', data);
+//             if (data.success) {
+//                 window.location.href = data.redirect;
+//             } else {
+//                 alert(data.error || 'Login gagal');
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//             alert('Terjadi kesalahan. Silakan coba lagi.');
+//         });
+// });
 
 function togglePassword() {
     var passwordField = document.getElementById("password");

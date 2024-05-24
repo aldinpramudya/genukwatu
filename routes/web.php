@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProfilDesaController::class, 'index'])->name('profil');
 Route::get('/sejarah-desa', [SejarahDesaController::class, 'index'])->name('sejarah');
-Route::get('/data-kependudukan', [DataKependudukanController::class, 'index'])->name('data-kependudukan');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 
 
@@ -19,7 +18,12 @@ Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 Route::get('/data-kependudukanadmin', function () {
     // Contoh halaman dashboard
     return view('admin.data-kependudukan');
-})->name('data-kependudukanadmin');
+})->name('admin.data-kependudukan');
+
+// check middleware
+Route::get('/check', function () {
+    return 'Check';
+})->middleware('AdminMiddleware');
 
 
 // Route Surat Masuk User
@@ -28,20 +32,22 @@ Route::get('/surat-masuk', [SuratMasukController::class, 'indexUser'])->name('su
 //Route Surat Keluar User
 Route::get('/surat-keluar', [SuratKeluarController::class, 'indexUser'])->name('surat-keluar');
 
-Route::get('/login', function () {
-    return view('login'); // Mengarahkan ke halaman login
-})->name('login');
-
-Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', function () {
+        return view('login'); // Mengarahkan ke halaman login
+    })->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+});
 
-//Routing Admin
+Route::group(['middleware' => 'AdminMiddleware'], function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('AdminMiddleware',)->group(function () {
+    Route::get('/data-kependudukan', [DataKependudukanController::class, 'index'])->name('data-kependudukan');
+
     Route::get('/admin-profile-desa', [ProfilDesaController::class, 'indexAdmin'])->name('admin-profil-desa');
     Route::get('/admin-sejarah-desa', [SejarahDesaController::class, 'indexAdmin'])->name('admin-sejarah-desa');
     Route::get('/admin-data-kependudukan', [DataKependudukanController::class, 'indexAdmin'])->name('admin-data-kependudukan');
@@ -57,7 +63,3 @@ Route::middleware('AdminMiddleware',)->group(function () {
     Route::put('/edit-surat-keluar/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.edit');
     Route::delete('/surat-keluar/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.destroy');
 });
-
-
-
-
