@@ -1,11 +1,13 @@
 <?php
-  
-  namespace App\Http\Controllers;
+
+namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Validator; 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -32,38 +34,33 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:8',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $user = new User;
         $user->name = $request->name;
         $user->username = $request->username;
-        $user->password = bcrypt($request->password);
+        $user->password = Hash::make($request->password);
         $user->save();
 
         return redirect()->route('login')->with('success', 'Registration successful. Please login.');
     }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            $token = auth()->attempt($credentials);
-            return response()->json(['token' => $token], 200)->cookie(
-                'jwt_token', $token, 60 // waktu kedaluwarsa dalam menit
-            );
+            // simpan dalam session 
+            session()->put('username', $request->username);
+            session()->put('password', $request->password);
+
+            return redirect()->route('admin-surat-keluar')->with('success', 'Login successful');
+        } else {
+            return redirect()->route('login')->with('error', 'Login failed. Please try again.');
         }
-
-        return redirect()->route('login')->with('error', 'Login failed. Please try again.');
     }
-
     /**
      * Log the user out (Invalidate the token).
      *
@@ -72,9 +69,11 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-        return redirect()->route('login')->with('success', 'Successfully logged out')->cookie(
-            'jwt_token', '', -1 // Menghapus cookie dengan mengatur waktu kedaluwarsa negatif
-        );
+        // invalidate session
+        session()->forget('username');
+        session()->forget('password');
+
+        return redirect()->route('login')->with('success', 'Logged out successfully');
     }
 
     /**
