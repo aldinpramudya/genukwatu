@@ -40,7 +40,9 @@
             @yield('content')
         </main>
     </div>
-    @include('layouts.footer')
+    <div class="fixed-bottom">
+        @include('layouts.footer')
+    </div>
     @include('layouts.js')
 
 </body>
