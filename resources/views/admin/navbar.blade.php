@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('data-kependudukan') }}">Data Kependudukan</a>
+                    <a class="nav-link" href="{{ route('admin.data-kependudukan') }}">Data Kependudukan</a>
                 </li>
                 <li class="nav-item dropdown">
                     <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
