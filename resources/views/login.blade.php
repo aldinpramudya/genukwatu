@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Login Form</title>
     <link rel="icon" type="image/jpg" href="{{ asset('img/Logo_Jombang.jpg') }}">
-=======
     <title>Form Login</title>
->>>>>>> 5d342972d9b2cabebb5aa8583b0a45ea2f92cee2
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
