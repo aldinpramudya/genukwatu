@@ -9,4 +9,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SuratMasuk extends Model
 {
     use HasFactory, SoftDeletes;
+
 }

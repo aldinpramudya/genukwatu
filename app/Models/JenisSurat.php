@@ -10,7 +10,13 @@ class JenisSurat extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'jenis_surat';
+
     protected $fillable = [
         'nama'
     ];
+
+    public function surat(){
+        return $this->hasMany(Surat::class, 'id_jenis_surat', 'id');
+    }
 }
