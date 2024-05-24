@@ -13,6 +13,17 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link href="{{ asset('template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="{{ asset('template/img/atom-solid.svg') }}">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <style>
         .nav-item.dropdown:hover .dropdown-menu {
             display: block;
@@ -22,46 +33,16 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row">
-            @include('layouts.header')
-            @include('layouts.navbar')
-            {{-- Section Content --}}
-            <main class="py-4">
-                @yield('content')
-            </main>
-        </div>
-        <div class="row align-items-end ">
-            @include('layouts.footer')
-        </div>
+        @include('layouts.header')
+        @include('layouts.navbar')
+        {{-- Section Content --}}
+        <main class="py-4">
+            @yield('content')
+        </main>
     </div>
+    @include('layouts.footer')
+    @include('layouts.js')
 
-    <!-- JAVASCRIPT -->
-    <script src="assets/libs/jquery/jquery.min.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/libs/node-waves/waves.min.js"></script>
-
-    <!-- Required datatable js -->
-    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <!-- Buttons examples -->
-    <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-    <script src="assets/libs/jszip/jszip.min.js"></script>
-    <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
-    <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
-    <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-    <!-- Responsive examples -->
-    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
-    <!-- Datatable init js -->
-    <script src="assets/js/pages/datatables.init.js"></script>
-
-    <script src="assets/js/app.js"></script>
 </body>
 
 </html>

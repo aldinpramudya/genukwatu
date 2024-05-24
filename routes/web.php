@@ -19,5 +19,5 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 Route::get('/data-kependudukanadmin', function () {
     // Contoh halaman dashboard
-    return view('data-kependudukan');
+    return view('admin.data-kependudukan');
 })->name('data-kependudukanadmin');
