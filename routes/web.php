@@ -14,6 +14,11 @@ Route::get('/login', function () {
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
 Route::get('/data-kependudukanadmin', function () {
     // Contoh halaman dashboard
     return view('admin.data-kependudukan');
