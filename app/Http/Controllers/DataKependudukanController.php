@@ -45,6 +45,7 @@ class DataKependudukanController extends Controller
         $totalLP = $dataPenduduk->sum('jumlah_pria_wanita');
 
         return view('admin.data-kependudukan', compact('dataPenduduk','totalKK','totalLK','totalP','totalLP'));
+
     }
 
     /**
@@ -52,7 +53,7 @@ class DataKependudukanController extends Controller
      */
     public function create()
     {
-        //
+        //quick
     }
 
     /**

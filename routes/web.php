@@ -14,19 +14,15 @@ Route::get('/sejarah-desa', [SejarahDesaController::class, 'index'])->name('seja
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 
 
-
-Route::get('/data-kependudukanadmin', function () {
-    // Contoh halaman dashboard
-    return view('admin.data-kependudukan');
-})->name('admin.data-kependudukan');
-
 // check middleware
 Route::get('/check', function () {
     return 'Check';
 })->middleware('AdminMiddleware');
 
 
-// Route Surat Masuk User
+
+Route::get('/data-kependudukan', [DataKependudukanController::class, 'indexGuest'])->name('data-kependudukan');
+
 Route::get('/surat-masuk', [SuratMasukController::class, 'indexUser'])->name('surat-masuk');
 
 //Route Surat Keluar User
@@ -46,11 +42,14 @@ Route::middleware(['guest'])->group(function () {
 Route::group(['middleware' => 'AdminMiddleware'], function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/data-kependudukan', [DataKependudukanController::class, 'index'])->name('data-kependudukan');
+    Route::get('/admin-data-kependudukan', [DataKependudukanController::class, 'indexAdmin'])->name('admin.data-kependudukan');
+    Route::post('/admin-data-kependudukank', [DataKependudukanController::class, 'store'])->name('admin.data-kependudukan.submit');
+    Route::put('/admin-data-kependudukan/{id}', [DataKependudukanController::class, 'update'])->name('admin.data-kependudukan.edit');
+    Route::delete('/admin-data-kependudukan/{id}', [DataKependudukanController::class, 'destroy'])->name('admin.data-kependudukan.destroy');
 
     Route::get('/admin-profile-desa', [ProfilDesaController::class, 'indexAdmin'])->name('admin-profil-desa');
     Route::get('/admin-sejarah-desa', [SejarahDesaController::class, 'indexAdmin'])->name('admin-sejarah-desa');
-    Route::get('/admin-data-kependudukan', [DataKependudukanController::class, 'indexAdmin'])->name('admin-data-kependudukan');
+    // Route::get('/admin-data-kependudukan', [DataKependudukanController::class, 'indexAdmin'])->name('admin-data-kependudukan');
     Route::get('/admin-kontak', [KontakController::class, 'indexAdmin'])->name('admin-kontak');
     // Route Fitur Surat Masuk Admin
     Route::get('/admin-surat-masuk', [SuratMasukController::class, 'index'])->name('admin-surat-masuk');
