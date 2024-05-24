@@ -15,6 +15,11 @@ class SuratKeluarController extends Controller
     public function index()
     {
         $suratKeluar = Surat::with('jenisSurat')->where('arah_surat', 'Surat Keluar')->get();
+        return view('admin.surat-keluar', compact('suratKeluar'));
+    }
+
+    public function indexUser(){
+        $suratKeluar = Surat::with('jenisSurat')->where('arah_surat', 'Surat Keluar')->get();
         return view('surat-keluar', compact('suratKeluar'));
     }
 

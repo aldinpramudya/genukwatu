@@ -17,6 +17,11 @@ class SuratMasukController extends Controller
     {
         $suratMasuk = Surat::with('jenisSurat')->where('arah_surat', 'Surat Masuk')->get();
         // dd($suratMasuk);
+        return view('admin.surat-masuk', compact('suratMasuk'));
+    }
+    
+    public function indexUser(){
+        $suratMasuk = Surat::with('jenisSurat')->where('arah_surat', 'Surat Masuk')->get();
         return view('surat-masuk', compact('suratMasuk'));
     }
 

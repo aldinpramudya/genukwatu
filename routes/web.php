@@ -24,17 +24,28 @@ Route::get('/data-kependudukanadmin', function () {
     return view('admin.data-kependudukan');
 })->name('data-kependudukanadmin');
 
-// Route Fitur Surat Masuk
-Route::get('/surat-masuk', [App\Http\Controllers\SuratMasukController::class, 'index'])->name('surat-masuk');
+// Route Surat Masuk User
+Route::get('/surat-masuk', [App\Http\Controllers\SuratMasukController::class, 'indexUser'])->name('surat-masuk');
+
+//Route Surat Keluar User
+Route::get('/surat-keluar', [App\Http\Controllers\SuratKeluarController::class, 'indexUser'])->name('surat-keluar');
+
+// Route Fitur Surat Masuk Admin
+Route::get('/admin-surat-masuk', [App\Http\Controllers\SuratMasukController::class, 'index'])->name('admin-surat-masuk');
 Route::post('/add-surat-masuk', [App\Http\Controllers\SuratMasukController::class, 'store'])->name('surat-masuk.submit');
 Route::put('/edit-surat-masuk/{id}', [App\Http\Controllers\SuratMasukController::class, 'update'])->name('surat-masuk.edit');
 Route::delete('/surat-masuk/{id}', [App\Http\Controllers\SuratMasukController::class, 'destroy'])->name('surat-masuk.destroy');
 
-// Route Fitur Surat Keluar
-Route::get('/surat-keluar', [App\Http\Controllers\SuratKeluarController::class, 'index'])->name('surat-keluar');
+// Route Fitur Surat Keluar Admin
+Route::get('/admin-surat-keluar', [App\Http\Controllers\SuratKeluarController::class, 'index'])->name('admin-surat-keluar');
 Route::post('/add-surat-keluar', [App\Http\Controllers\SuratKeluarController::class, 'store'])->name('surat-keluar.submit');
 Route::put('/edit-surat-keluar/{id}', [App\Http\Controllers\SuratKeluarController::class, 'update'])->name('surat-keluar.edit');
 Route::delete('/surat-keluar/{id}', [App\Http\Controllers\SuratKeluarController::class, 'destroy'])->name('surat-keluar.destroy');
+
+//Routing Admin
+Route::get('/admin-profile-desa', [App\Http\Controllers\ProfilDesaController::class, 'indexAdmin'])->name('admin-profil-desa');
+
+
 
 
 
