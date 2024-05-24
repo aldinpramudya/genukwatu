@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function showRegisterForm()
     {
-        return view('addAdmin');
+        return view('admin/addAdmin');
     }
 
     /**
@@ -44,7 +44,7 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('login')->with('success', 'Registration successful. Please login.');
+        return redirect()->route('admin-surat-masuk')->with('success', 'Registration successful. Please login.');
     }
 
     public function login(Request $request): RedirectResponse
