@@ -1,0 +1,11 @@
+
+.login-img {
+    width: 100px; /* Anda dapat menyesuaikan ukuran ini */
+    height: auto;
+}
+.form-control::placeholder {
+    text-align: center;
+}
+.form-control {
+    text-align: center;
+}
