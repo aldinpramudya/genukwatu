@@ -10,6 +10,8 @@ class Surat extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = "surat";
+
     protected $fillable = [
         'id_jenis_surat', 
         'nama_pengirim', 
