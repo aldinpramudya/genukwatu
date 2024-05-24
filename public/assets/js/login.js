@@ -20,7 +20,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         // Jika login berhasil, simpan token dalam cookie
         if (data.token) {
             document.cookie = `jwt_token=${data.token}; path=/`;
-            window.location.href = '/data-kependudukanadmin'; // Redirect ke halaman data-kependudukanadmin
+            window.location.href = '/data-kependudukan'; // Redirect ke halaman data-kependudukanadmin
         } else {
             alert(data.error || 'Login gagal');
         }
@@ -41,7 +41,7 @@ function togglePassword() {
 }
 
 function goBack() {
-    // Mengarahkan pengguna ke halaman yang diinginkan. 
+    // Mengarahkan pengguna ke halaman yang diinginkan.
     // Ubah 'URL_Halaman_Yang_Diinginkan' dengan URL halaman yang Anda inginkan.
     window.location.href = '/';
 }
